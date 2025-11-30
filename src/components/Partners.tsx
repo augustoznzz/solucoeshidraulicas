@@ -1,11 +1,16 @@
 import { Card } from "@/components/ui/card";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import cleberImg from "@/assets/cleber.jpg";
 import marcosImg from "@/assets/marcos.jpg";
 import { Award, ThumbsUp } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const Partners = () => {
-  const { ref, isVisible } = useScrollAnimation();
+  const [isVisible, setIsVisible] = useState(false);
+  
+  useEffect(() => {
+    // Executa a animação imediatamente ao montar o componente
+    setIsVisible(true);
+  }, []);
   const partners = [
     {
       name: "Cléber",
@@ -25,7 +30,7 @@ const Partners = () => {
       <div className="absolute top-0 right-0 w-32 h-32 sm:w-64 sm:h-64 bg-primary/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-32 h-32 sm:w-64 sm:h-64 bg-accent-foreground/5 rounded-full blur-3xl" />
       
-      <div ref={ref} className="container max-w-6xl mx-auto relative z-10">
+      <div className="container max-w-6xl mx-auto relative z-10">
         <div className={`text-center mb-8 sm:mb-12 md:mb-16 transition-all duration-700 ${isVisible ? 'animate-slide-up' : 'opacity-0'}`}>
           <div className="inline-flex items-center gap-2 mb-3 sm:mb-4">
             <Award className="w-6 h-6 sm:w-8 sm:h-8 text-primary animate-pulse-glow" />
@@ -50,7 +55,7 @@ const Partners = () => {
                   src={partner.image}
                   alt={partner.name}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  loading="lazy"
+                  loading="eager"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-card/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4 sm:pb-6">
                   <ThumbsUp className="w-6 h-6 sm:w-8 sm:h-8 text-primary" />

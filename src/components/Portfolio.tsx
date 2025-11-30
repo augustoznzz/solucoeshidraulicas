@@ -1,13 +1,18 @@
 import { Card } from "@/components/ui/card";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Sparkles, CheckCircle2 } from "lucide-react";
+import { useEffect, useState } from "react";
 import work1 from "@/assets/work1.jpg";
 import work2 from "@/assets/work2.jpg";
 import work3 from "@/assets/work3.jpg";
 import work4 from "@/assets/work4.jpg";
 
 const Portfolio = () => {
-  const { ref, isVisible } = useScrollAnimation();
+  const [isVisible, setIsVisible] = useState(false);
+  
+  useEffect(() => {
+    // Executa a animação imediatamente ao montar o componente
+    setIsVisible(true);
+  }, []);
   const works = [
     {
       title: "Instalação Completa de Banheiro",
@@ -36,7 +41,7 @@ const Portfolio = () => {
       {/* Animated gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent-foreground/5 animate-gradient opacity-50" />
       
-      <div ref={ref} className="container max-w-6xl mx-auto relative z-10">
+      <div className="container max-w-6xl mx-auto relative z-10">
         <div className={`text-center mb-8 sm:mb-12 md:mb-16 transition-all duration-700 ${isVisible ? 'animate-slide-up' : 'opacity-0'}`}>
           <div className="inline-flex items-center gap-2 mb-3 sm:mb-4">
             <Sparkles className="w-6 h-6 sm:w-8 sm:h-8 text-primary animate-pulse-glow" />
@@ -61,7 +66,7 @@ const Portfolio = () => {
                   src={work.image}
                   alt={work.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1"
-                  loading="lazy"
+                  loading="eager"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
                   <CheckCircle2 className="w-12 h-12 sm:w-16 sm:h-16 text-primary-foreground transform scale-0 group-hover:scale-100 transition-transform duration-500" />

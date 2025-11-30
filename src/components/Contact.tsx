@@ -1,20 +1,16 @@
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { MapPin, Phone, Mail, Send } from "lucide-react";
-import { toast } from "sonner";
+import { MapPin, Phone, Mail, MessageCircle } from "lucide-react";
+
 const Contact = () => {
   const {
     ref,
     isVisible
   } = useScrollAnimation();
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast.success("Mensagem enviada! Entraremos em contato em breve.");
-  };
+  
+  const whatsappNumber = "5500000000000"; // Replace with actual WhatsApp number
+  const whatsappMessage = encodeURIComponent("Olá! Gostaria de solicitar um orçamento.");
+  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
   return <section id="contato" className="py-8 sm:py-12 md:py-16 lg:py-20 px-3 sm:px-4 md:px-6 bg-card relative overflow-hidden">
       {/* Floating decorative elements - reduzidos em mobile */}
       <div className="absolute top-20 left-10 w-24 h-24 sm:w-48 sm:h-48 bg-primary/10 rounded-full blur-3xl animate-float hidden sm:block" />
@@ -32,42 +28,8 @@ const Contact = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
-          <Card className={`p-3 sm:p-4 md:p-6 lg:p-8 border-gradient hover-lift transition-all duration-500 ${isVisible ? 'animate-slide-left' : 'opacity-0'}`}>
-            <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 md:space-y-6">
-              <div>
-                <Label htmlFor="name" className="text-xs sm:text-sm md:text-base">Nome</Label>
-                <Input id="name" placeholder="Seu nome completo" required className="mt-1.5 sm:mt-2 text-sm sm:text-base h-9 sm:h-10 md:h-11" />
-              </div>
-              
-              <div>
-                <Label htmlFor="phone" className="text-xs sm:text-sm md:text-base">Telefone</Label>
-                <Input id="phone" type="tel" placeholder="(00) 00000-0000" required className="mt-1.5 sm:mt-2 text-sm sm:text-base h-9 sm:h-10 md:h-11" />
-              </div>
-              
-              <div>
-                <Label htmlFor="email" className="text-xs sm:text-sm md:text-base">E-mail</Label>
-                <Input id="email" type="email" placeholder="seu@email.com" required className="mt-1.5 sm:mt-2 text-sm sm:text-base h-9 sm:h-10 md:h-11" />
-              </div>
-              
-              <div>
-                <Label htmlFor="message" className="text-xs sm:text-sm md:text-base">Mensagem</Label>
-                <Textarea id="message" placeholder="Descreva o serviço que você precisa..." rows={4} required className="mt-1.5 sm:mt-2 text-sm sm:text-base min-h-[100px] sm:min-h-[120px]" />
-              </div>
-
-              <Button type="submit" size="lg" className="w-full text-xs sm:text-sm md:text-base lg:text-lg py-4 sm:py-5 md:py-6 shadow-md hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 relative overflow-hidden group mt-2 sm:mt-4">
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  Enviar Mensagem
-                  <Send className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
-                </span>
-                <div className="absolute inset-0 shimmer-effect opacity-0 group-hover:opacity-100 transition-opacity" />
-              </Button>
-            </form>
-          </Card>
-
-          <div className={`space-y-3 sm:space-y-4 md:space-y-6 transition-all duration-700 ${isVisible ? 'animate-slide-right' : 'opacity-0'}`} style={{
-          animationDelay: "0.2s"
-        }}>
+        <div className="max-w-4xl mx-auto">
+          <div className={`space-y-3 sm:space-y-4 md:space-y-6 transition-all duration-700 ${isVisible ? 'animate-slide-up' : 'opacity-0'}`}>
             <Card className="p-3 sm:p-4 md:p-6 lg:p-8 glass-effect hover-lift group">
               <div className="flex items-start gap-2 sm:gap-3 md:gap-4">
                 <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:bg-primary/20 transition-all duration-300">
@@ -102,6 +64,30 @@ const Contact = () => {
                   <h3 className="text-base sm:text-lg md:text-xl font-semibold mb-1 sm:mb-2 text-foreground">Localização</h3>
                   <p className="text-xs sm:text-sm md:text-base text-muted-foreground">Atendemos toda a região</p>
                 </div>
+              </div>
+            </Card>
+
+            {/* Botão WhatsApp destacado */}
+            <Card className="p-4 sm:p-6 md:p-8 border-gradient hover-lift group">
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-[#25D366] to-[#128C7E] mb-4 sm:mb-6 mx-auto group-hover:scale-110 transition-transform duration-300">
+                  <MessageCircle className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-white" />
+                </div>
+                <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2 sm:mb-3 text-foreground">
+                  Fale Conosco no WhatsApp
+                </h3>
+                <p className="text-xs sm:text-sm md:text-base text-muted-foreground mb-4 sm:mb-6">
+                  Clique no botão abaixo ou use o botão flutuante no canto da tela
+                </p>
+                <a 
+                  href={whatsappLink} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 md:px-10 py-3 sm:py-4 bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300"
+                >
+                  <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
+                  <span className="text-sm sm:text-base md:text-lg">Abrir WhatsApp</span>
+                </a>
               </div>
             </Card>
           </div>
