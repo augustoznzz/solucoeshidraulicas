@@ -1,0 +1,75 @@
+import { Card } from "@/components/ui/card";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import cleberImg from "@/assets/cleber.jpg";
+import marcosImg from "@/assets/marcos.jpg";
+import { Award, ThumbsUp } from "lucide-react";
+
+const Partners = () => {
+  const { ref, isVisible } = useScrollAnimation();
+  const partners = [
+    {
+      name: "Cléber",
+      image: cleberImg,
+      description: "Especialista em instalações hidráulicas residenciais e comerciais",
+    },
+    {
+      name: "Marcos",
+      image: marcosImg,
+      description: "Especialista em manutenção e reparos de sistemas hidráulicos",
+    },
+  ];
+
+  return (
+    <section id="socios" className="py-20 px-4 bg-card relative overflow-hidden">
+      {/* Decorative background */}
+      <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent-foreground/5 rounded-full blur-3xl" />
+      
+      <div ref={ref} className="container max-w-6xl mx-auto relative z-10">
+        <div className={`text-center mb-16 transition-all duration-700 ${isVisible ? 'animate-slide-up' : 'opacity-0'}`}>
+          <div className="inline-flex items-center gap-2 mb-4">
+            <Award className="w-8 h-8 text-primary animate-pulse-glow" />
+          </div>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-foreground">
+            Nossos Profissionais
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Experiência e compromisso em cada serviço
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+          {partners.map((partner, index) => (
+            <Card 
+              key={partner.name}
+              className={`overflow-hidden border-gradient hover-lift transition-all duration-500 ${isVisible ? 'animate-slide-up' : 'opacity-0'}`}
+              style={{ animationDelay: `${0.2 + index * 0.2}s` }}
+            >
+              <div className="aspect-square overflow-hidden relative group">
+                <img
+                  src={partner.image}
+                  alt={partner.name}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-card/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+                  <ThumbsUp className="w-8 h-8 text-primary" />
+                </div>
+              </div>
+              <div className="p-6 md:p-8 text-center relative">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-1 bg-gradient-to-r from-transparent via-primary to-transparent" />
+                <h3 className="text-2xl md:text-3xl font-bold mb-3 text-foreground">
+                  {partner.name}
+                </h3>
+                <p className="text-base md:text-lg text-muted-foreground">
+                  {partner.description}
+                </p>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Partners;
