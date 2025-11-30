@@ -32,24 +32,24 @@ const Portfolio = () => {
   ];
 
   return (
-    <section id="portfolio" className="py-20 px-4 bg-background relative overflow-hidden">
+    <section id="portfolio" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-background relative overflow-hidden">
       {/* Animated gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent-foreground/5 animate-gradient opacity-50" />
       
       <div ref={ref} className="container max-w-6xl mx-auto relative z-10">
-        <div className={`text-center mb-16 transition-all duration-700 ${isVisible ? 'animate-slide-up' : 'opacity-0'}`}>
-          <div className="inline-flex items-center gap-2 mb-4">
-            <Sparkles className="w-8 h-8 text-primary animate-pulse-glow" />
+        <div className={`text-center mb-8 sm:mb-12 md:mb-16 transition-all duration-700 ${isVisible ? 'animate-slide-up' : 'opacity-0'}`}>
+          <div className="inline-flex items-center gap-2 mb-3 sm:mb-4">
+            <Sparkles className="w-6 h-6 sm:w-8 sm:h-8 text-primary animate-pulse-glow" />
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-foreground">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 text-foreground px-2">
             Nossos Trabalhos
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
             Confira alguns dos nossos projetos concluídos com excelência
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 gap-6 md:gap-8">
+        <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
           {works.map((work, index) => (
             <Card 
               key={index}
@@ -61,17 +61,18 @@ const Portfolio = () => {
                   src={work.image}
                   alt={work.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                  <CheckCircle2 className="w-16 h-16 text-primary-foreground transform scale-0 group-hover:scale-100 transition-transform duration-500" />
+                  <CheckCircle2 className="w-12 h-12 sm:w-16 sm:h-16 text-primary-foreground transform scale-0 group-hover:scale-100 transition-transform duration-500" />
                 </div>
               </div>
-              <div className="p-6 relative">
+              <div className="p-4 sm:p-6 relative">
                 <div className="absolute top-0 left-0 w-16 h-1 bg-gradient-to-r from-primary to-transparent transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-                <h3 className="text-xl md:text-2xl font-semibold mb-2 text-foreground group-hover:text-primary transition-colors duration-300">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2 text-foreground group-hover:text-primary transition-colors duration-300">
                   {work.title}
                 </h3>
-                <p className="text-sm md:text-base text-muted-foreground">
+                <p className="text-xs sm:text-sm md:text-base text-muted-foreground">
                   {work.description}
                 </p>
               </div>
